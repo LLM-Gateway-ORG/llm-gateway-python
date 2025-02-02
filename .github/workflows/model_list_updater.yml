@@ -30,7 +30,7 @@ jobs:
 
       # Step 4: Run the update script
       - name: Run update script
-        run: python scripts/ai_models_updater.py
+        run: python src/llmgateway/scripts/ai_models_updater.py
 
       # Step 5: Check and commit changes
       - name: Commit and push changes
