@@ -1,0 +1,59 @@
+[project]
+name = "llm-gateway-core"
+version = "0.1.0"
+description = "A Python package to access different LLMs, embeddings, vector stores etc"
+authors = [
+    { name = "Subhomoy Roy Choudhury", email = "subhomoyrchoudhury@gmail.com" },
+]
+readme = "README.md"
+license = "MIT"
+keywords = ["python", "llm gateway", "ai"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.9"
+dependencies = ["litellm (>=1.59.9,<2.0.0)"]
+
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.venv
+  | _build
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+
+[tool.pre-commit]
+repos = ["https://github.com/psf/black", "https://github.com/PyCQA/isort"]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.1.0"
+black = "^25.1.0"
+isort = "^6.0.0"

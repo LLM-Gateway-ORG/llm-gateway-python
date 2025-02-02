@@ -1,0 +1,8 @@
+{
+    "Krutrim-spectre-v2": {
+        "provider": "ola_krutrim",
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true
+    }
+}
