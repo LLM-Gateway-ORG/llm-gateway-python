@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-    <!-- <img alt="Test Cases" src="https://github.com/LLM-Gateway-ORG/llm-gateway-core/actions/workflows/main.yml/badge.svg" /> -->
+    <img alt="Update Models List" src="https://github.com/LLM-Gateway-ORG/llm-gateway-core/actions/workflows/model_list_updater.yml/badge.svg" />
     <img alt="Downloads" src="https://img.shields.io/github/downloads/LLM-Gateway-ORG/llm-gateway-core/total" />
     <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/LLM-Gateway-ORG/llm-gateway-core?color=dark-green" />
     <img alt="Github Issues" src="https://img.shields.io/github/issues/LLM-Gateway-ORG/llm-gateway-core" />
@@ -28,7 +28,7 @@
     <img alt="Repo Size" src="https://img.shields.io/github/repo-size/LLM-Gateway-ORG/llm-gateway-core" />
     <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/LLM-Gateway-ORG/llm-gateway-core" />
     <img alt="Github License" src="https://img.shields.io/github/license/LLM-Gateway-ORG/llm-gateway-core" />
-    <!-- <img alt="Test Cases" src="https://github.com/LLM-Gateway-ORG/llm-gateway-core/actions/workflows/publish.yml/badge.svg" /> -->
+    <img alt="Deploy Docs" src="https://github.com/LLM-Gateway-ORG/llm-gateway-core/actions/workflows/deploy-docs.yml/badge.svg" />
 
 
 </p>
