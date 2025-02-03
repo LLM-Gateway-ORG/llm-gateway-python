@@ -37,8 +37,6 @@
 
 * [About the Project](#about-the-project)
 * [Features](#features)
-* [Technical Highlights](#technical-highlights)
-* [Usage Scenarios](#usage-scenarios)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
