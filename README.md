@@ -28,7 +28,7 @@
     <img alt="Repo Size" src="https://img.shields.io/github/repo-size/LLM-Gateway-ORG/llm-gateway-core" />
     <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/LLM-Gateway-ORG/llm-gateway-core" />
     <img alt="Github License" src="https://img.shields.io/github/license/LLM-Gateway-ORG/llm-gateway-core" />
-    <img alt="Test Cases" src="https://github.com/LLM-Gateway-ORG/llm-gateway-core/actions/workflows/publish.yml/badge.svg" />
+    <!-- <img alt="Test Cases" src="https://github.com/LLM-Gateway-ORG/llm-gateway-core/actions/workflows/publish.yml/badge.svg" /> -->
 
 
 </p>
