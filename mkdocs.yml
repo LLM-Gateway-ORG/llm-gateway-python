@@ -4,6 +4,7 @@ repo_url: https://github.com/LLM-Gateway-ORG/llm-gateway-core
 nav:
   - Getting Started: index.md
   - License: license.md
+  - Supported Models: models_list.html
 theme:
   name: material
   # logo: assets/hacker.png
