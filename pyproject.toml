@@ -57,3 +57,9 @@ build-backend = "poetry.core.masonry.api"
 pre-commit = "^4.1.0"
 black = "^25.1.0"
 isort = "^6.0.0"
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.6.1"
+
+[tool.poetry.scripts]
+serve-docs = "mkdocs:serve" # poetry run serve-docs  # To preview docs locally
+deploy-docs = "mkdocs:gh-deploy" # poetry run deploy-docs  # To deploy to GitHub Pages
