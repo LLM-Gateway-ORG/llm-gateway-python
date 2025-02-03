@@ -205,16 +205,17 @@
 
                     const filteredModels = Object.fromEntries(
                         Object.entries(models).filter(([name, details]) => {
+                            console.log(name, searchTerm);
                             return (
                                 (name.toLowerCase().includes(searchTerm) ||
-                                    details.mode
-                                        .toLowerCase()
-                                        .includes(searchTerm) ||
-                                    details.provider
-                                        .toLowerCase()
-                                        .includes(searchTerm)) &&
-                                (!mode || details.mode === mode) &&
-                                (!provider || details.provider === provider)
+                                    details?.mode
+                                        ?.toLowerCase()
+                                        ?.includes(searchTerm) ||
+                                    details?.provider
+                                        ?.toLowerCase()
+                                        ?.includes(searchTerm)) &&
+                                (!mode || details?.mode === mode) &&
+                                (!provider || details?.provider === provider)
                             );
                         })
                     );
