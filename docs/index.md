@@ -117,7 +117,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Read the Documentation [here](https://github.com/LLM-Gateway-ORG/llm-gateway-core/blob/master/example/sample.py)
+Read the Documentation [here](https://github.com/LLM-Gateway-ORG/llm-gateway-core/blob/main/example/sample.py)
 
 
 ## Roadmap
@@ -141,7 +141,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/LLM-Gateway-ORG/llm-gateway-core/blob/master/LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/LLM-Gateway-ORG/llm-gateway-core/blob/main/LICENSE) for more information.
 
 ## Contact
 **Subhomoy Roy Choudhury** - [Github](https://src-portfolio.oderna.in/link/GITHUB) - [Linkedin](https://src-portfolio.oderna.in/link/LINKEDIN) - [Twitter](https://src-portfolio.oderna.in/link/TWITTER)
