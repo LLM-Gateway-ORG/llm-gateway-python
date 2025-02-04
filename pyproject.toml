@@ -1,5 +1,5 @@
 [project]
-name = "llm-gateway-core"
+name = "llm_gateway_core"
 version = "0.1.0"
 description = "A Python package to access different LLMs, embeddings, vector stores etc"
 authors = [
@@ -19,9 +19,11 @@ classifiers = [
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.9,<4.0"
 dependencies = ["litellm (>=1.59.9,<2.0.0)"]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/llmgateway"]
 
 [tool.black]
 line-length = 88
@@ -50,8 +52,8 @@ repos = ["https://github.com/psf/black", "https://github.com/PyCQA/isort"]
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.1.0"
