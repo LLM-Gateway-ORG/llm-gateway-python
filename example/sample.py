@@ -1,6 +1,6 @@
 import asyncio
 
-from llm_gateway_core import Chat
+from llmgateway import Chat
 
 
 async def main():

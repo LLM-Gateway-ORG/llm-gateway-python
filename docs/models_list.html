@@ -125,16 +125,19 @@
 
                 async function fetchModels() {
                     try {
-                        const response = await axios.get(
-                            "https://raw.githubusercontent.com/LLM-Gateway-ORG/llm-gateway-core/refs/heads/main/src/llmgateway/provider/data/models_list.json"
-                        );
-                        models = response.data;
+                        const response = await fetch("./models_list.json"); // Ensure this file is served via a web server
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch models: ${response.status} ${response.statusText}`);
+                        }
+
+                        const models = await response.json();
                         populateFilters();
                         renderModels(models);
                     } catch (error) {
                         console.error("Error fetching models:", error.message);
                     }
                 }
+
 
                 // Function to update theme based on time
                 function updateTheme() {

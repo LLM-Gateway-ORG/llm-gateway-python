@@ -32,7 +32,7 @@ jobs:
           pip install -r requirements.txt
 
       # Step 4: Run the update script
-      - name: Run update script
+      - name: Run model updater script
         run: python src/llmgateway/scripts/ai_models_updater.py
 
       # Step 5: Check and commit changes
@@ -42,8 +42,8 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
           # Check if files exist before attempting to add them
-          if [ -f "src/llmgateway/provider/data/models_list.json" ] && [ -f "src/llmgateway/provider/data/data/litellm_models_list.json" ]; then
-            git add src/llmgateway/provider/data/data/models_list.json src/llmgateway/provider/data/data/litellm_models_list.json
+          if [ -f "src/llmgateway/provider/data/models_list.json" ] && [ -f "src/llmgateway/provider/data/litellm_models_list.json" ]; then
+            git add src/llmgateway/provider/models_list.json src/llmgateway/provider/data/litellm_models_list.json
           else
             echo "Required files do not exist. Skipping commit."
             exit 0

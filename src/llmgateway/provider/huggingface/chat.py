@@ -1,7 +1,7 @@
-from .base import BaseLLM
+from ..base import BaseLLM
 
 
-class Huggingface(BaseLLM):
+class HuggingfaceChat(BaseLLM):
     def __init__(self):
         super().__init__()
 

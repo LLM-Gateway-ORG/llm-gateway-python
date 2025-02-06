@@ -1,15 +1,15 @@
 from .base import BaseLLM
 from .enum import ProviderEnum
-from .huggingface import Huggingface
-from .litellm import Litellm
-from .ola_krutrim import OlaKrutrim
+from .huggingface.factory import HuggingFaceFactory
+from .litellm.factory import LiteLLMfactory
+from .ola_krutrim.factory import OlaKrutrimFactory
 
 
 def LLM_Factory(provider: str, **kwargs) -> BaseLLM:
-    # if provider == ProviderEnum.HUGGINGFACE.value:
-    #     return Huggingface(**kwargs)
-    # elif provider == ProviderEnum.OLA_KRUTRIM.value:
-    #     return OlaKrutrim(**kwargs)
-    if any(provider == e.value for e in ProviderEnum):
-        return Litellm(**kwargs)
-    raise Exception("Unsupported provider specified.")
+    if provider == ProviderEnum.HUGGINGFACE.value:
+        return HuggingFaceFactory(**kwargs)
+    elif provider == ProviderEnum.OLA_KRUTRIM.value:
+        return OlaKrutrimFactory(**kwargs)
+    elif provider == ProviderEnum.LITELLM.value:
+        return LiteLLMfactory(**kwargs)
+    raise ValueError("Unsupported provider specified.")

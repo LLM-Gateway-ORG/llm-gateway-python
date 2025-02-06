@@ -1,9 +1,9 @@
 from litellm import acompletion, completion
 
-from .base import BaseLLM
+from ..base import BaseLLM
 
 
-class Litellm(BaseLLM):
+class LiteLLMChat(BaseLLM):
     def __init__(self, api_key: str, **kwargs):
         if not api_key:
             raise ValueError("API Key Not Found !!")

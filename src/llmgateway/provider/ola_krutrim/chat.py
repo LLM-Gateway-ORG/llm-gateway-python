@@ -1,9 +1,9 @@
-from .base import BaseLLM
+from ..base import BaseLLM
 
 # from krutrim_cloud import KrutrimCloud
 
 
-class OlaKrutrim(BaseLLM):
+class OlaKrutrimChat(BaseLLM):
     def __init__(self, api_key: str, **kwargs) -> None:
         self.client = None
         # self.client = KrutrimCloud(api_key=api_key)
