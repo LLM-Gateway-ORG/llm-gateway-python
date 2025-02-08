@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
 
-from constants import ModesEnum
-from provider import BaseLLM, LLM_Factory
-from provider.enum import ProviderEnum
-from utils import get_model_list
+from .constants import ModesEnum
+from .provider import BaseLLM, LLM_Factory
+from .provider.enum import ProviderEnum
+from .utils import get_model_list
 
 
 class BaseLLMGeneration(ABC):

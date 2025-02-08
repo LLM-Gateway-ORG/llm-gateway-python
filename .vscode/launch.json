@@ -8,7 +8,7 @@
             "name": "Python Debugger: Run code",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/src/chat.py",
+            "program": "${workspaceFolder}/run.local.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

@@ -1,5 +1,4 @@
-from src.llmgateway.constants import ModesEnum
-
+from ...constants import ModesEnum
 from .chat import HuggingfaceChat
 
 

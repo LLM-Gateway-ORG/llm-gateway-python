@@ -1,4 +1,4 @@
-from base import BaseEnum
+from .base import BaseEnum
 
 
 class ModesEnum(BaseEnum):
@@ -9,7 +9,7 @@ class ModesEnum(BaseEnum):
     VECTOR_STORE = "vector_store"
 
 
-class ProcessorType(Enum):
+class ProcessorType(BaseEnum):
     WEB = "web"
     DOCUMENT = "document"
     YOUTUBE = "youtube"
