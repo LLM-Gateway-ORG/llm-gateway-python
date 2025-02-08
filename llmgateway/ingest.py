@@ -2,8 +2,6 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from pathlib import Path
 
-from constants import ProcessorType
-from helpers import get_content_type
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import (
     Docx2txtLoader,
@@ -26,6 +24,9 @@ from langchain_community.document_loaders.generic import GenericLoader
 # )
 from langchain_community.document_loaders.parsers.audio import OpenAIWhisperParser
 from langchain_community.vectorstores import Qdrant
+
+from .constants import ProcessorType
+from .helpers import get_content_type
 
 # from langchain_community.embeddings import OllamaEmbeddings
 # from langchain_google_genai import GoogleGenerativeAIEmbeddings
