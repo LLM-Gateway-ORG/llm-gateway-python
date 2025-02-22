@@ -44,7 +44,7 @@ def fetch_ola_krutrim_models_list(base_path: Path) -> dict:
 
 def main() -> None:
     try:
-        BASE_FILE_PATH = Path("src/llmgateway/provider/")
+        BASE_FILE_PATH = Path("llmgateway/provider/")
 
         litellm_models_dict = fetch_litellm_models_list()
         # Writing the updated data back to the JSON file
