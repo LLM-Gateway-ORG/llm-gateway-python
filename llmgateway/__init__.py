@@ -9,9 +9,10 @@ from .utils import get_model_list
 
 class BaseLLMGeneration(ABC):
     mode = None  # Should be set in the subclass
+    provider = None
 
-    def __init__(self, model: str) -> None:
-        self.model = model
+    def __init__(self, model_name: str) -> None:
+        self.model_name = model_name
         # Parse Model String
         self._parse_model()
 
@@ -22,10 +23,10 @@ class BaseLLMGeneration(ABC):
 
     def _parse_model(self) -> None:
         """Parses the model string into provider and model name."""
-        if ":" not in self.model and self.model.count(":") > 0:
+        if ":" not in self.model_name and self.model.count(":") > 0:
             raise ValueError("Invalid model format. Expected '<provider>:<model_name>'")
 
-        parser_string = self.model.split(":", 1)
+        parser_string = self.model_name.split(":", 1)
         self.provider = ProviderEnum.fetch(parser_string[0])
         self.model_name = parser_string[1]
 
@@ -40,10 +41,6 @@ class BaseLLMGeneration(ABC):
                 f"Model '{self.model_name}' not found or incompatible with mode '{self.mode}'"
             )
         return models_list[self.model_name]
-
-    def _fetch_provider(self) -> str:
-        """Returns the provider of the model."""
-        return self._model_details.get("provider")
 
     def load_model(self):
         """Lazy loads the model when needed."""
@@ -82,9 +79,8 @@ class Chat(BaseLLMGeneration):
         self.__api_key = api_key
 
     def _load_model_impl(self) -> BaseLLM:
-        provider = self._fetch_provider()
         return LLM_Factory(
-            provider=provider,
+            provider=self.provider,
             api_key=self.api_key,
             model_name=self.model_name,
         )
