@@ -12,20 +12,43 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
             - name: Configure Git Credentials
               run: |
-                  git config user.name github-actions[bot]
-                  git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-            - uses: actions/setup-python@v4
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
               with:
-                  python-version: 3.x
-            - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-            - uses: actions/cache@v3
+                  python-version: "3.x"
+
+            - name: Set Cache ID
+              run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+
+            - name: Cache MkDocs Dependencies
+              uses: actions/cache@v3
               with:
                   key: mkdocs-material-${{ env.cache_id }}
                   path: .cache
                   restore-keys: |
                       mkdocs-material-
-            - run: pip install mkdocs-material
-            - run: mkdocs gh-deploy --force
+
+            - name: Install Dependencies
+              run: |
+                  pip install --upgrade pip
+                  pip install mkdocs-material
+                  if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+            - name: Copy Additional Files
+              run: |
+                  if [ -f models_list.json ]; then
+                      cp models_list.json docs/
+                  else
+                      echo "Warning: models_list.json not found!"
+                  fi
+
+            - name: Build and Deploy MkDocs
+              run: mkdocs gh-deploy --force
