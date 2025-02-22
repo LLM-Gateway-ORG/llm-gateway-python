@@ -82,7 +82,7 @@ class Chat(BaseLLMGeneration):
         self.__api_key = api_key
 
     def _load_model_impl(self) -> BaseLLM:
-        provider = self.__fetch_provider()
+        provider = self._fetch_provider()
         return LLM_Factory(
             provider=provider,
             api_key=self.api_key,
