@@ -10,6 +10,10 @@ theme:
   # logo: assets/hacker.png
   icon:
     repo: fontawesome/brands/git-alt
+
+extra_files:
+  - "../models_list.json"
+
 extra:
   plugins:
     - optimize

@@ -59,7 +59,7 @@ def main() -> None:
         # Update the `litellm_models` and retain `other_models`
         updated_data = litellm_models_dict | krutrim_models_dict
 
-        write_json_file(os.path.join("docs", "models_list.json"), updated_data)
+        write_json_file(os.path.join("models_list.json"), updated_data)
 
         print("models_list.json updated successfully.")
 
