@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LLM Gateway Model</title>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <style>
+            body {
+                transition: background-color 0.5s, color 0.5s;
+            }
+            .dark-theme {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            .light-theme {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .search-filter-container {
+                margin-bottom: 20px;
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+            .model-table {
+                margin-top: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .model-table th,
+            .model-table td {
+                padding: 15px;
+            }
+            .model-table th {
+                background-color: #26a69a;
+                color: white;
+            }
+            .model-table tbody tr:hover {
+                background-color: rgba(38, 166, 154, 0.1);
+            }
+            .input-field input[type="text"] {
+                color: inherit;
+            }
+            .input-field label {
+                color: inherit;
+            }
+            .select-wrapper input.select-dropdown {
+                color: inherit;
+            }
+            .dropdown-content li > span {
+                color: inherit;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="center-align">LLM Gateway Models</h1>
+            <div class="search-filter-container">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">search</i>
+                        <input
+                            type="text"
+                            id="search"
+                            placeholder="Search models..."
+                        />
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <select id="mode-filter">
+                            <option value="" selected>All Modes</option>
+                            <!-- Modes will be populated dynamically -->
+                        </select>
+                        <label>Filter by Mode</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <select id="provider-filter">
+                            <option value="" selected>All Providers</option>
+                            <!-- Providers will be populated dynamically -->
+                        </select>
+                        <label>Filter by Provider</label>
+                    </div>
+                </div>
+            </div>
+            <table class="highlight model-table">
+                <thead>
+                    <tr>
+                        <th>Model Name</th>
+                        <th>Max Tokens</th>
+                        <th>Max Input Tokens</th>
+                        <th>Max Output Tokens</th>
+                        <th>Input Cost</th>
+                        <th>Output Cost</th>
+                        <th>Provider</th>
+                        <th>Mode</th>
+                    </tr>
+                </thead>
+                <tbody id="model-list">
+                    <!-- Model rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async function () {
+                const elems = document.querySelectorAll("select");
+                M.FormSelect.init(elems);
+
+                const searchInput = document.getElementById("search");
+                const modeFilter = document.getElementById("mode-filter");
+                const providerFilter =
+                    document.getElementById("provider-filter");
+                const modelList = document.getElementById("model-list");
+                let models = {};
+
+                async function fetchModels() {
+                    try {
+                        const response = await fetch("./models_list.json"); // Ensure this file is served via a web server
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch models: ${response.status} ${response.statusText}`);
+                        }
+
+                        const models = await response.json();
+                        populateFilters();
+                        renderModels(models);
+                    } catch (error) {
+                        console.error("Error fetching models:", error.message);
+                    }
+                }
+
+
+                // Function to update theme based on time
+                function updateTheme() {
+                    const hour = new Date().getHours();
+                    if (hour >= 18 || hour < 6) {
+                        document.body.classList.add("dark-theme");
+                        document.body.classList.remove("light-theme");
+                    } else {
+                        document.body.classList.add("light-theme");
+                        document.body.classList.remove("dark-theme");
+                    }
+                }
+
+                // Function to populate filters dynamically
+                function populateFilters() {
+                    const modes = new Set();
+                    const providers = new Set();
+
+                    Object.values(models).forEach((model) => {
+                        modes.add(model.mode);
+                        providers.add(model.provider);
+                    });
+
+                    modes.forEach((mode) => {
+                        const option = document.createElement("option");
+                        option.value = mode;
+                        option.textContent = mode;
+                        modeFilter.appendChild(option);
+                    });
+
+                    providers.forEach((provider) => {
+                        const option = document.createElement("option");
+                        option.value = provider;
+                        option.textContent = provider;
+                        providerFilter.appendChild(option);
+                    });
+
+                    M.FormSelect.init(modeFilter);
+                    M.FormSelect.init(providerFilter);
+                }
+
+                // Function to render models
+                function renderModels(filteredModels) {
+                    modelList.innerHTML = "";
+                    Object.entries(filteredModels).forEach(
+                        ([name, details]) => {
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+                        <td>${name}</td>
+                        <td>${details.max_tokens}</td>
+                        <td>${details.max_input_tokens}</td>
+                        <td>${details.max_output_tokens}</td>
+                        <td>${details.input_cost_per_token}</td>
+                        <td>${details.output_cost_per_token}</td>
+                        <td>${details.provider}</td>
+                        <td>${details.mode}</td>
+                    `;
+                            modelList.appendChild(row);
+                        }
+                    );
+                }
+
+                // Function to filter models
+                function filterModels() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const mode = modeFilter.value;
+                    const provider = providerFilter.value;
+
+                    const filteredModels = Object.fromEntries(
+                        Object.entries(models).filter(([name, details]) => {
+                            console.log(name, searchTerm);
+                            return (
+                                (name.toLowerCase().includes(searchTerm) ||
+                                    details?.mode
+                                        ?.toLowerCase()
+                                        ?.includes(searchTerm) ||
+                                    details?.provider
+                                        ?.toLowerCase()
+                                        ?.includes(searchTerm)) &&
+                                (!mode || details?.mode === mode) &&
+                                (!provider || details?.provider === provider)
+                            );
+                        })
+                    );
+
+                    renderModels(filteredModels);
+                }
+
+                // Event listeners
+                searchInput.addEventListener("input", filterModels);
+                modeFilter.addEventListener("change", filterModels);
+                providerFilter.addEventListener("change", filterModels);
+
+                // Initialize
+                updateTheme();
+                populateFilters();
+                await fetchModels();
+            });
+        </script>
+    </body>
+</html>
