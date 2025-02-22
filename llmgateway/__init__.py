@@ -35,10 +35,10 @@ class BaseLLMGeneration(ABC):
         models_list = get_model_list()
         if (
             self.model_name not in models_list
-            or models_list[self.model_name].get("mode") != self.mode
+            or models_list[self.model_name].get("mode") != self.mode.value
         ):
             raise ValueError(
-                f"Model '{self.model_name}' not found or incompatible with mode '{self.mode}'"
+                f"Model '{self.model_name}' not found or incompatible with mode '{self.mode.value}'"
             )
         return models_list[self.model_name]
 
