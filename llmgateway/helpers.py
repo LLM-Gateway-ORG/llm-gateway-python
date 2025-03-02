@@ -1,4 +1,5 @@
 import mimetypes
+import os
 
 
 def get_content_type(filepath: str) -> str:
